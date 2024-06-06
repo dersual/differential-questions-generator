@@ -1,0 +1,182 @@
+:root[data-theme="light"] {
+  --text: #090c0c;
+  --background: #f9fbfb;
+  --primary: #3b4e4e;
+  --secondary: #abadbf;
+  --accent: #9f9ab1;
+}
+:root[data-theme="dark"] {
+  --text: #f3f6f6;
+  --background: #040606;
+  --primary: #b1c4c4;
+  --secondary: #404254;
+  --accent: #534e65;
+}
+
+:root {
+  --shadow-color: 207deg 10% 52%;
+  --shadow-elevation-low: 0.6px 0.5px 1px hsl(var(--shadow-color) / 0.18),
+    1.1px 0.9px 1.9px -0.6px hsl(var(--shadow-color) / 0.29),
+    2.6px 2px 4.3px -1.3px hsl(var(--shadow-color) / 0.4);
+  --shadow-elevation-medium: 0.6px 0.5px 1px hsl(var(--shadow-color) / 0.19),
+    2.6px 2px 4.3px -0.4px hsl(var(--shadow-color) / 0.27),
+    5.8px 4.4px 9.5px -0.9px hsl(var(--shadow-color) / 0.36),
+    12.8px 9.9px 21.1px -1.3px hsl(var(--shadow-color) / 0.45);
+  --shadow-elevation-high: 0.6px 0.5px 1px hsl(var(--shadow-color) / 0.17),
+    5.1px 4px 8.5px -0.2px hsl(var(--shadow-color) / 0.21),
+    9.3px 7.2px 15.3px -0.4px hsl(var(--shadow-color) / 0.25),
+    14.3px 11px 23.5px -0.6px hsl(var(--shadow-color) / 0.29),
+    21.1px 16.3px 34.8px -0.7px hsl(var(--shadow-color) / 0.34),
+    31px 23.9px 51.1px -0.9px hsl(var(--shadow-color) / 0.38),
+    44.9px 34.7px 74.1px -1.1px hsl(var(--shadow-color) / 0.42),
+    64.1px 49.5px 105.7px -1.3px hsl(var(--shadow-color) / 0.46);
+}
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+}
+/*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+    5. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+    6. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+    7. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+    8. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+#background {
+  height: 100%;
+  background-image: url("assets/imgs/math_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+#startContainer {
+  box-shadow: var(--shadow-elevation-high);
+}
+#startContainer > .row {
+  background-color: var(--background);
+  color: var(--text);
+} 
+#startContainer .h1::before { 
+    content: "";
+    height: 15%;
+    width: 70%;
+    display: block; 
+    left:50%; 
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 30%;
+    position: absolute;
+    transition: all .3s ease;
+    background: linear-gradient(180deg, transparent 30%, var(--text) 70%);
+}
+.libre-baskerville-regular {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.libre-baskerville-bold {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.libre-baskerville-regular-italic {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.source-sans-3-regular {
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.source-sans-3-light {
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 4300;
+  font-style: normal;
+}
+button {
+  background-color: transparent; 
+  color: var(--text) !important;
+}
+button:hover {
+  transition: 0.25s;
+}
+#play, #submit, #restart {
+  border-color: var(--primary) !important;
+}
+#play:hover, #submit:hover, #restart:hover {
+  background-color: var(--primary) !important;
+}
+#cheatsheet {
+  border-color: var(--secondary) !important;
+}
+#cheatsheet:hover {
+  background-color: var(--secondary) !important;
+}
+#cheatsheetModal .modal-content, #gameScreenContainer, #endScreen { 
+    background-color: var(--background) !important; 
+    color:var(--text) !important; 
+    box-shadow: var(--shadow-elevation-high);
+}  
+#gameScreenContainer, #endScreen { 
+    display:none; 
+}

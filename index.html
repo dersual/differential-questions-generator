@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="Practice For Differential Questions" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/math.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script defer src="//unpkg.com/mathlive"></script>
+  </head>
+  <body style="overflow: hidden; width: 100vw; height: 100vh">
+    <div id="background" class="opacity-50 img-fluid"></div>
+    <div
+      id="startContainer"
+      class="position-absolute top-50 start-50 translate-middle container rounded"
+    >
+      <div class="row p-3">
+        <div class="col-12 mt-2">
+          <h1 class="libre-baskerville-bold text-center h1">Differential Questions Generator</h1>
+        </div>
+        <div class="col-12 mt-2">
+          <h4 class="source-sans-3-regular h4">
+            This is a game where simple differential questions are generated. Every question
+            answered correctly, you get a point. Earn as many points as possible without getting a
+            question incorrect. If you answer incorrectly you have to restart. If you need a quick
+            review there is a cheatsheet that just goes over the rules for derivatives. Otherwise,
+            if you don't need help, just click the start button. Good luck!
+          </h4>
+        </div>
+        <div class="row mt-2 justify-content-center">
+          <div class="col-md-5 d-flex justify-content-center mt-2">
+            <button id="play" type="button" class="btn w-50 p-2">Play</button>
+          </div>
+          <div class="col-md-5 d-flex justify-content-center mt-2">
+            <button
+              id="cheatsheet"
+              type="button"
+              class="btn w-50 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#cheatsheetModal"
+            >
+              Cheatsheet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="gameScreenContainer"
+      class="position-absolute top-50 start-50 translate-middle container rounded"
+    >
+      <div class="row justify-content-center p-2">
+        <div class="col-12 d-flex justify-content-center mt-2">
+          <h3 id = "points" class="text-center source-sans-3-light h3">Points: 0</h3>
+        </div>
+        <div id="questionContainer" class="col-12 mt-2 d-flex justify-content-center flex-column">
+          <h3 class="libre-baskerville-regular h3 text-center">Find the derivative.</h3>
+          <p class="libre-baskerville-regular text-center">
+            exp(x) stands for \(e^x\), the a in front of the trig identities stands for arc so it
+            inverses them.
+          </p>
+          <div id="question" class="h2 row justify-content-center"></div>
+        </div>
+        <div id="answerContainer" class="col-12 d-flex justify-content-center mt-2">
+          <math-field id="answer" class="w-50"></math-field>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-2">
+          <button id="submit" type="button" class="btn w-50 p-2">Check Answer</button>
+        </div> 
+      </div>
+    </div>
+    <div id ="endScreen"   class="position-absolute top-50 start-50 translate-middle container rounded">  
+        <div class="row justify-content-center p-2">   
+            <div id = "correctAnswer" class="col-12 h3 mt-2 text-center justify-content-center" > 
+
+            </div>
+            <div id = "pointsEarned" class = "col-12 justify-content-center mt-2 text-center h3"> 
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2">
+                <button id="restart" type="button" class="btn w-50 p-2">Reload</button>
+              </div>
+        </div> 
+    </div>
+    <div
+      id="cheatsheetModal"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="cheatsheetModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 libre-baskerville-regular" id="exampleModalLabel">
+              Cheatsheet
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="background-color: #fff"
+            ></button>
+          </div>
+          <div class="modal-body" style="color: var(--text)">
+            <h3 class="h3 libre-baskerville-regular">General Derivative Rules</h3>
+            <h5 class="libre-baskerville-regular">Power Rule</h5>
+            $$\frac{d}{d x}\left(x^n\right)=n x^{n-1} $$
+            <h5 class="libre-baskerville-regular">Sum Rule</h5>
+            $$\frac{d}{d x}[f(x)+g(x)]=f^{\prime}(x)+g^{\prime}(x)$$
+            <h5 class="libre-baskerville-regular">Difference Rule</h5>
+            $$\frac{d}{d x}[f(x)-g(x)]=f^{\prime}(x)-g^{\prime}(x)$$
+            <h5 class="libre-baskerville-regular">Product Rule</h5>
+            $$\frac{d}{d x}[f(x) g(x)]=f(x) \mathrm{g}^{\prime}(x)+g(x) f^{\prime}(x)$$
+            <h5 class="libre-baskerville-regular">Quotient Rule</h5>
+            $$\frac{d}{d x}\left[\frac{f(x)}{g(x)}\right]=\frac{g(x) f^{\prime}(x)-f(x)
+            g^{\prime}(x)}{[g(x)]^2}$$
+            <h5 class="libre-baskerville-regular">Chain Rule</h5>
+            $$\frac{d}{d x} f(g(x))=f^{\prime}(g(x)) g^{\prime}(x)$$
+            <h3 class="h3 libre-baskerville-regular">Exponential & Logarithmic Derivative Rules</h3>
+            <h5 class="libre-baskerville-regular">Exponential</h5>
+            $$\begin{aligned} & \frac{d}{d x}\left(e^x\right)=e^x \\ & \frac{d}{d
+            x}\left(a^x\right)=a^x \ln a \\ & \frac{d}{d x}\left(e^{g(x)}\right)=e^{g(x)}
+            g^{\prime}(x) \\ & \frac{d}{d x}\left(a^{g(x)}\right)=\ln (\mathrm{a}) \mathrm{a}^{g(x)}
+            g^{\prime}(x)\end{aligned}$$
+            <h5 class="libre-baskerville-regular">Logarithmic</h5>
+            $$\begin{aligned} & \frac{d}{d x}(\ln x)=\frac{1}{x}, x>0 \\ & \frac{d}{d x} \ln
+            (g(x))=\frac{g^{\prime}(x)}{g(x)} \\ & \frac{d}{d x}\left(\log _a x\right)=\frac{1}{x
+            \ln a}, x>0 \\ & \frac{d}{d x}\left(\log _a g(x)\right)=\frac{g^{\prime}(x)}{g(x) \ln
+            a}\end{aligned}$$
+            <h3 class="h3 libre-baskerville-regular">Trig Derivative Rules</h3>
+            <h5 class="libre-baskerville-regular">Trig</h5>
+            $$\begin{aligned} & \frac{d}{d x}(\sin x)=\cos x \\ & \frac{d}{d x}(\cos x)=-\sin x \\ &
+            \frac{d}{d x}(\tan x)=\sec ^2 x \\ & \frac{d}{d x}(\csc x)=-\csc x \cot x \\ &
+            \frac{d}{d x}(\sec x)=\sec x \tan x \\ & \frac{d}{d x}(\cot x)=-\csc ^2 x\end{aligned}$$
+            <h5 class="libre-baskerville-regular">Inverse Trig</h5>
+            $$\begin{aligned} & \frac{d}{d x}\left(\sin ^{-1} x\right)=\frac{1}{\sqrt{1-x^2}}, x
+            \neq \pm 1 \\ & \frac{d}{d x}\left(\cos ^{-1} x\right)=\frac{-1}{\sqrt{1-x^2}}, x \neq
+            \pm 1 \\ & \frac{d}{d x}\left(\tan ^{-1} x\right)=\frac{1}{1+x^2} \\ & \frac{d}{d
+            x}\left(\cot ^{-1} x\right)=\frac{-1}{1+x^2} \\ & \frac{d}{d x}\left(\sec ^{-1}
+            x\right)=\frac{1}{x \sqrt{x^2-1}}, x \neq \pm 1,0 \\ & \frac{d}{d x}\left(\csc ^{-1}
+            x\right)=\frac{-1}{x \sqrt{x^2-1}}, x \neq \pm 1,0\end{aligned}$$
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn source-sans-3-regular"
+              style="background-color: var(--primary); border-color: var(--primary)"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
